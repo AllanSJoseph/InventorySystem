@@ -21,7 +21,7 @@ if(!isset($_SESSION['userid'])){
     <nav>
         <a href="display_inventory.php" class="btn btn-primary">Display Inventory</a>
         <a href="add_item.php" class="btn btn-primary">Add Item to Inventory</a>
-        <a href="stocker_profile.php" class="btn btn-primary">Your Profile</a>
+        <!-- <a href="stocker_profile.php" class="btn btn-primary">Your Profile</a> -->
         <a href="../logout.php">Logout</a>
     </nav>
 </body>
