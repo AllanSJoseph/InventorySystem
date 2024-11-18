@@ -1,0 +1,7 @@
+function validate(){
+    
+}
+
+function checkUser(){
+
+}

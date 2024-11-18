@@ -1,0 +1,11 @@
+Known Issues
+Issues in Draft Bill
+Delete Entry will delete all the product entries of the same prodid, use invoiceno to fix it. -- FIXED
+Edit Quantity not working -- FIXED
+Add Entry not working  -- FIXED
+Discard Bill not working
+
+
+
+Display Inventory need some work lol
+Complete functions related to updating the quantity and deleting the product

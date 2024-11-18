@@ -1,0 +1,24 @@
+/* styles.css */
+
+/* Custom table styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #ec5f5f;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.8rem;
+    color: #c90f0f;
+}
