@@ -52,6 +52,7 @@ function updateTable() {
            
             data.forEach((item, index) => {
                 const row = document.createElement('tr');
+                row.setAttribute('id',item.prodid);
 
                 const snoCell = document.createElement('td');
                 snoCell.textContent = index + 1;
@@ -77,7 +78,7 @@ function updateTable() {
                 totalPriceCell.textContent = item.tprice;
                 row.appendChild(totalPriceCell);
 
-                // Edit btn
+                // Edit button
                 const editCell = document.createElement('td');
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit Quantity';
@@ -87,7 +88,7 @@ function updateTable() {
                 editCell.appendChild(editButton);
                 row.appendChild(editCell);
 
-                // Delete btn
+                // Delete button
                 const deleteCell = document.createElement('td');
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
@@ -115,7 +116,7 @@ function addEntry() {
         return;
     }
 
-    // AJAX to insert data into MySQL
+    
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "./billFunctions/addToBill.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -132,7 +133,6 @@ function addEntry() {
         }
     };
 
-    // Send data to the server
     xhr.send(`invoiceno=${invoiceno.value}&prodid=${prodId.value}&prodname=${prodName.value}&price=${price.value}&quantity=${quantity.value}&totalPrice=${tprice.value}`);
 }
 
@@ -208,5 +208,45 @@ function discardBill() {
     }
 }
 
+function openPaymentModel(){
+    document.getElementById("paymentModal").style.display = "block";
+}
 
+function closePaymentModel(){
+    document.getElementById("paymentModal").style.display = "none";
+}
+
+function issueBill(){
+    const paymentM = document.getElementById("payment").value;
+    closePaymentModel();
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',`issue_bill.php?invoiceno=${invoiceno.value}&payment=${paymentM}`,true);
+    
+    xhr.onload = function() {
+        if(xhr.status == 200){
+            console.log(xhr.responseText);
+            const result = JSON.parse(xhr.responseText);
+
+            if(result.status === "error"){
+                if(result.discrepancies){
+                    alert('Error! Cannot Issue Bill! Quantity higher than Inventory Quantity...');
+                    result.discrepancies.forEach((item) => {
+                        const markid = item.prodid;
+                        document.getElementById(markid).style.color = "red";
+                    });
+                    
+                }else{
+                    alert('Error! Something Went Wrong... Please Try again later');
+                }
+            }else if(result.status === "success"){
+                alert('Bill Issued Successfully! Consider to share my greetings to the Customer :)');
+                window.location = "cashier_home.php";
+            }
+
+        }
+    }
+
+    xhr.send();
+}
 window.onload = updateTable;

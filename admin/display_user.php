@@ -5,30 +5,20 @@ require "admin.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styledisplayUser.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Users</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Admincss/displaytable.css">
+    <link rel="stylesheet" href="Admincss/nav.css">
 </head>
 <body>
-<?php include 'nav.php'; ?>
+    <nav>
+            <a href="add_user.php">Add a New User (Stocker/Cashier)</a>
+            <a href="display_user.php">Display All Users</a>
+            <a href="display_bills.php">Display Bill Records</a>
+            <a href="display_inventory.php">Display Inventory</a>
+    </nav>
     <h1>Showing Stockers and Cashiers Registered to this database...</h1>
 
     <?php 
@@ -65,7 +55,7 @@ require "admin.php";
                   echo '<td>' . $row["phone"] . '</td>';
                   echo '<td>' . $row["address"] . '</td>';
                   echo '<td>' . $row["type"] . '</td>';
-                  echo '<td><button class="btn btn-outline-primary">Delete</button>';
+                  echo '<td><button class="btn btn-outline-primary" onclick="deleteUser('.$row["userid"].')">Delete</button>';
                   echo '</tr>';
     
                   $count++;
@@ -73,6 +63,7 @@ require "admin.php";
         }
     ?>
 
+<script src="adminscripts.js"></script>
     
 </body>
 </html>

@@ -2,7 +2,10 @@
 session_start();
 include("cashier.php");
 
-
+if(!isset($_SESSION['userid'])){
+    header("Location: ../index.php");
+    exit();
+}
 
 if(isset($_GET['invoiceno'])){
     $invno = $_GET['invoiceno'];
@@ -84,7 +87,7 @@ if(isset($_GET['invoiceno'])){
         </tbody>
     </table>
 
-    <button>Issue Bill</button>
+    <button onclick="openPaymentModel()">Issue Bill</button>
     <button onclick="discardBill()">Discard Bill</button>
     <button onclick="updateTable()">Update Bill</button>
 
@@ -102,6 +105,26 @@ if(isset($_GET['invoiceno'])){
             <br><br>
             <button onclick="saveQuantity()">Save</button>
             <button onclick="closeEditModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="paymentModal" style="display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: auto; padding: 20px; border: 1px solid #888; width: 30%;">
+            <h2>Set Payment Method</h2>
+            
+            <label for="payment">Payment Method: </label>
+            <select id="payment" name="payment" required>
+                <option value="CASH">CASH</option>
+                <option value="CARD">CARD</option>
+                <option value="UPI">UPI</option>
+            </select>
+
+            <br><br>
+
+            <button onclick="issueBill()">Issue Bill</button>
+            <button onclick="closePaymentModel()">Cancel</button>
+
+            <p><b>NOTE:</b> If you select payment mode and issue the items in the bill are considered as purchased</p>
         </div>
     </div>
 

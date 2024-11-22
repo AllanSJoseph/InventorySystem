@@ -24,8 +24,17 @@ session_start();
             background-color: #f2f2f2;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Admincss/nav.css">
+    <link rel="stylesheet" href="Admincss/displaytable.css">
 </head>
 <body>
+    <nav>
+        <a href="add_user.php">Add a New User (Stocker/Cashier)</a>
+        <a href="display_user.php">Display All Users</a>
+        <a href="display_bills.php">Display Bill Records</a>
+        <a href="display_inventory.php">Display Inventory</a>
+    </nav>
     <h1>Showing All Items in the Inventory...</h1>
 
     <?php 

@@ -27,13 +27,15 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["emai
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User to Database</title>
+    <link rel="stylesheet" href="Admincss/add_user.css">
+    <link rel="stylesheet" href="Admincss/nav.css">
 </head>
 <body>
     <nav>
-        <a href="Add User">Add a New User (Stocker/Cashier)</a>
-        <a href="Display Users">Display All Users</a>
-        <a href="Display Bill History">Display Bill Records</a>
-        <a href="Display Inventory">Display Inventory</a>
+        <a href="#">Add a New User (Stocker/Cashier)</a>
+        <a href="display_user.php">Display All Users</a>
+        <a href="display_bills.php">Display Bill Records</a>
+        <a href="display_inventory.php">Display Inventory</a>
     </nav>
 
     <form onsubmit="return validate()" method="POST">

@@ -1,10 +1,13 @@
 <?php
 session_start();
+require "cashier.php";
 
 if(!isset($_SESSION['userid'])){
     header("Location: ../index.php");
     exit();
 }
+
+$cid = $_SESSION['userid'];
 
 ?>
 
@@ -19,7 +22,7 @@ if(!isset($_SESSION['userid'])){
 <h1>Showing Bills Created in this database...</h1>
 
 <?php 
-  $bills = $admin->displayBillHistory();
+  $bills = $cashier->displayBillHistory($cid);
 
   if(empty($bills)){
     echo "<centre><p class='text-centre'><b>No Bills Issued</b></p><centre>";
@@ -34,7 +37,6 @@ if(!isset($_SESSION['userid'])){
             <th scope="col">Date Issued</th>
             <th scope="col">Total Price</th>
             <th scope="col">Payment Method</th>
-            <th scope="col">Cashier</th>
             <th scope="col">Actions</th>
           </tr>
         </thead><tbody>';
@@ -49,13 +51,19 @@ if(!isset($_SESSION['userid'])){
               echo '<td>' . $row["date"] . '</td>';
               echo '<td>' . $row["total_price"] . '</td>';
               echo '<td>' . $row["paymethod"] . '</td>';
-              echo '<td>' . $row["username"] . '</td>';
-              echo '<td><button class="btn btn-outline-primary" onclick="viewBill('.$row["invoiceno"].')">View Bill</button>';
-              echo '</tr>';
+              echo '<td>';
+              echo '<button class="btn btn-outline-primary" onclick="viewBill('.$row["invoiceno"].')">View Bill</button>';
+              if($row["paymethod"] == ""){
+                echo '<button class="btn btn-outline-primary" onclick="editBill('.$row["invoiceno"].')">Edit Bill</button>';
+                echo '<button class="btn btn-outline-primary" onclick="discardBill('.$row["invoiceno"].')">Discard Bill</button>';
+              }
+              echo '</td></tr>';
 
               $count++;
           }
     }
 ?>
+
+<script src="dBill.js"></script>
 </body>
 </html>

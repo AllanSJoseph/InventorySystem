@@ -50,6 +50,18 @@ class Admin extends Database{
         return $users;
     }
 
+    function deleteUser($userId){
+        $sql = "DELETE FROM users WHERE userid = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i",$userId);
+        
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     function displayBillHistory(){
         $sql = "SELECT b.invoiceno, b.date, b.total_price, b.paymethod, u.username FROM 
         bills b JOIN users u ON b.cashier = u.userid;";
@@ -69,6 +81,43 @@ class Admin extends Database{
         $stmt->close();
         return $bills;
     }
+
+    function displayBill($invoice_no){
+        $sql = "SELECT * FROM bills WHERE invoiceno = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $invoice_no);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                return $row;
+            }
+        }
+
+    }
+
+    function displayBillItems($invoice_no){
+        $sql = "SELECT ba.invoiceno, ba.prodid, ba.qty, ba.tprice, p.name, p.price 
+        FROM bill_archive AS ba
+        JOIN products AS p ON ba.prodid = p.prodid
+        WHERE ba.invoiceno = ?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $invoice_no);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $rows = array();
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        $stmt->close();
+        return $rows;
+        }
+    } 
 
     function displayInventory(){
         $sql = "SELECT * FROM products";
