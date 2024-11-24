@@ -10,10 +10,12 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["emai
     $address = $_POST["address"];
     $type = $_POST["type"];
 
-    if($admin->addUser($username,$password,$email,$phone,$address,$type)){
-        echo '<script>alert("User Added Successfully")</script>';
-    }else{
-        echo '<script>alert("Failed to Add User")</script>';
+    $response = $admin->addUser($username,$password,$email,$phone,$address,$type);
+
+    if ($response['status'] === 1) {
+        echo '<script>alert("'.$response['message'].'")</script>';
+    } else {
+        echo '<script>alert("ERROR: '.$response['message'].'")</script>';
     }
 }
 
@@ -53,7 +55,7 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["emai
         <input type="email" id="email" name="email"><br><br>
 
         <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone"><br><br>
+        <input type="text" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" id="phone" name="phone"><br><br>
 
         <label for="address">Address:</label>
         <textarea id="address" name="address" rows="4" cols="50"></textarea><br><br>
