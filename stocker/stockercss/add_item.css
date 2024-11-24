@@ -1,92 +1,108 @@
-/* Apply a classic background color gradient */
+/* General body and font styling */
 body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column; /* Change to column layout */
-    align-items: center;
-    background: linear-gradient(135deg, #f0f0f0, #d9d9d9);
     font-family: Arial, sans-serif;
+    background-color: #eaf6f6; /* Soft background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: flex-start; /* Move content towards the top */
 }
 
-/* Style the moving heading */
-.moving-heading {
-    font-size: 2em;
-    color: #007bff;
-    margin: 20px 0; /* Space around the heading */
-    position: absolute; /* Position it absolutely */
-    top: 20px; /* Fixed position from the top */
-    left: 50%; /* Center it horizontally */
-    transform: translateX(-50%); /* Centering adjustment */
-    animation: moveUpDown 2s ease-in-out infinite; /* Animation */
+/* Heading styling */
+h1.moving-heading {
+    font-size: 3em;
+    color: #4CAF50; /* Bright green for heading */
+    text-align: center;
+    margin-top: 20px; /* Add margin to ensure space from the top */
+    animation: moveText 5s infinite; /* Animation */
 }
 
-/* Keyframes for the heading animation */
-@keyframes moveUpDown {
-    0%, 100% {
-        transform: translate(-50%, -10px); /* Adjust for vertical movement */
+/* Animation for the heading */
+@keyframes moveText {
+    0% {
+        transform: translateX(0);
     }
     50% {
-        transform: translate(-50%, 10px); /* Adjust for vertical movement */
+        transform: translateX(15px); /* Less translation for a smooth effect */
+    }
+    100% {
+        transform: translateX(0);
     }
 }
 
-/* Style the form container */
+/* Form styling */
 form {
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-    margin-top: 100px; /* Add margin to create space below the heading */
-    animation: fadeIn 0.5s ease-in-out;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow for depth */
+    width: 100%;
+    max-width: 600px;
+    margin-top: 30px; /* Add space between the heading and the form */
+    border-left: 6px solid #4CAF50; /* Green border for form accent */
 }
 
-/* Input fields styling */
+/* Label styling */
+label {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+}
+
+/* Input and textarea styling */
 input[type="text"],
 input[type="number"],
 textarea {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
-
-/* Change border color on focus */
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-    border-color: #007bff;
-    outline: none;
+    padding: 12px; /* Larger padding for a more spacious feel */
+    margin: 12px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    background-color: #f9f9f9; /* Light gray background for inputs */
 }
 
 /* Submit button styling */
 input[type="submit"] {
-    background-color: #007bff;
+    background-color: #ff6f61; /* Vibrant coral-red */
     color: white;
-    padding: 10px;
+    padding: 14px 22px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
 }
 
-/* Change background color on hover */
+/* Hover effect for the submit button */
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #e65c4f; /* Darker coral-red on hover */
 }
 
-/* Animation for the form */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+/* Responsive styling */
+@media (max-width: 768px) {
+    h1.moving-heading {
+        font-size: 2.2em; /* Smaller heading size on smaller screens */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    form {
+        padding: 20px;
+        width: 90%;
+    }
+
+    label,
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        font-size: 1em;
+    }
+
+    input[type="submit"] {
+        font-size: 1.1em;
     }
 }

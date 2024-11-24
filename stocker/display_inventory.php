@@ -15,26 +15,14 @@ if(!isset($_SESSION['userid'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Items</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./stockercss/display_inventory.css">
+
 </head>
 <body>
     <h1>Showing All Items in the Inventory...</h1>
-    <a href="add_item.php">Add Item to Inventory</a>
-    <a href="add_item.php">Refresh Table</a>
+    <button class="btn btn-outline-primary"><a href="add_item.php">Add Item to Inventory</a></button>
+    <button class="btn btn-outline-primary"><a href="#">Refresh Table</a></button>
 
     <?php 
       $items = $stocker->displayProductInventory();
@@ -54,7 +42,7 @@ if(!isset($_SESSION['userid'])){
                 <th scope="col">Stock</th>
                 <th scope="col">Description</th>
                 <th scope="col">Modified On</th>
-                <th colspan=3>Actions</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead><tbody>';
   
@@ -70,9 +58,9 @@ if(!isset($_SESSION['userid'])){
                   echo '<td>' . $row["stock"] . '</td>';
                   echo '<td>' . $row["description"] . '</td>';
                   echo '<td>' . $row["modifiedon"] . '</td>';
-                  echo '<td> <button onclick="editProduct('.$row["prodid"].')">Edit Details</button></td>';
-                  echo '<td> <button onclick="editStock('.$row["prodid"].')">Edit Stock</button></td>';
-                  echo '<td> <button onclick="deleteProduct('.$row["prodid"].')">Delete Product</button></td>';
+                  echo '<td> <button class="btn btn-outline-primary" onclick="editProduct('.$row["prodid"].')">Edit Details</button>';
+                  echo '<button class="btn btn-outline-primary" onclick="editStock('.$row["prodid"].')">Edit Stock</button>';
+                  echo '<button class="btn btn-outline-primary" onclick="deleteProduct('.$row["prodid"].')">Delete</button></td>';
                   echo '</tr>';
     
                   $count++;
@@ -93,10 +81,12 @@ if(!isset($_SESSION['userid'])){
                 <input type="text" id="editName" name="name"><br><br>
 
                 <label for="editPrice">Price:</label>
-                <input type="number" id="editPrice" name="price"><br><br>
+                <input type="number" id="editPrice" name="price" min="0" >
+                <p id="errPrice" onkeyup="" style="display: None;">Value can't be negative or 0...</p><br><br>
 
                 <label for="editStock">Stock:</label>
-                <input type="number" id="editStock" name="stock"><br><br>
+                <input type="number" onkeyup="checkQty()" id="editStock" name="stock">
+                <p id="errStock" style="display: None;">Value can't be negative or 0...</p><br><br>
 
                 <label for="editDescription">Description:</label>
                 <textarea id="editDescription" name="description"></textarea><br><br>
@@ -126,7 +116,7 @@ if(!isset($_SESSION['userid'])){
     </div>
 </div>
 
-    <script src="inventoryfns.js"></script>
+<script src="inventoryfns.js"></script>
     
 </body>
 </html>

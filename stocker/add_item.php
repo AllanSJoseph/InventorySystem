@@ -36,15 +36,19 @@ if(isset($_POST["pname"]) && isset($_POST["price"]) && isset($_POST["stock"]) &&
         <input type="text" name="pname" id="pname"><br><br>
 
         <label for="price">Price: </label>
-        <input type="number" name="price" id="price"><br><br>
+        <input type="number" onchange="checkPrice()" name="price" id="price">
+        <p id="errPrice" style="display: None;">Value can't be negative or 0...</p><br><br>
 
         <label for="stock">Stock: </label>
-        <input type="number" name="stock" id="stock"><br><br>
+        <input type="number" onchange="checkQty()" name="stock" id="stock">
+        <p id="errStock" style="display: None;">Value can't be negative or 0...</p><br><br>
 
         <label for="description">Description: </label>
         <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
 
         <input type="submit" value="Submit">
     </form>    
+
+    <script src="inventoryfns.js"></script>
 </body>
 </html>

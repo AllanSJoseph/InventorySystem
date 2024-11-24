@@ -34,6 +34,7 @@ session_start();
         <a href="display_user.php">Display All Users</a>
         <a href="display_bills.php">Display Bill Records</a>
         <a href="display_inventory.php">Display Inventory</a>
+        <a href="../logout.php">Logout</a>
     </nav>
     <h1>Showing Bills Created in this database...</h1>
 

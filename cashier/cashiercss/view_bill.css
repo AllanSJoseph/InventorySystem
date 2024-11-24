@@ -1,0 +1,157 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1.5s ease-out; /* Fade-in effect for the entire body */
+}
+
+h1, h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeInUp 1s forwards; /* Fade-in and slide-up effect */
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    animation-delay: 0.5s; /* Delay for the main heading */
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    animation-delay: 1s; /* Delay for subheadings */
+}
+
+/* Header section styling */
+hr {
+    border: 1px solid #3498db;
+    width: 50%;
+    margin: 20px auto;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards; /* Fade-in effect for the hr */
+}
+
+/* Table styling */
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards; /* Table fade-in and slide-up */
+    animation-delay: 1.5s;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #3498db;
+    transition: transform 0.3s ease; /* Add smooth transform on hover */
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+    transform: scale(1);
+}
+
+th:hover {
+    transform: scale(1.1); /* Slightly scale up on hover */
+}
+
+td {
+    background-color: #ecf0f1;
+}
+
+td:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+/* Button and alert styling */
+button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Button hover effect */
+}
+
+button:hover {
+    background-color: #c0392b;
+    transform: scale(1.1); /* Slightly enlarge button on hover */
+}
+
+.text-centre {
+    color: #e74c3c;
+    font-size: 20px;
+    font-weight: bold;
+    animation: textPopUp 0.8s ease-out forwards; /* Text pop-up animation */
+}
+
+centre {
+    display: block;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textPopUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive Styling */
+@media only screen and (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    th, td {
+        font-size: 16px;
+    }
+}

@@ -27,10 +27,11 @@ $billItems = $admin->displayBillItems($invno);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Bill</title>
+    <link rel="stylesheet" href="./Admincss/view_bill.css">
 </head>
 <body>
     <h1>Bill Details</h1>
-    <br><br><br>
+    <br>
     <hr>
 
     <h2><b>Invoice No: </b><?php echo $billDetails['invoiceno']; ?></h2>

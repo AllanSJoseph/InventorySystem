@@ -36,6 +36,7 @@ if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["emai
         <a href="display_user.php">Display All Users</a>
         <a href="display_bills.php">Display Bill Records</a>
         <a href="display_inventory.php">Display Inventory</a>
+        <a href="../logout.php">Logout</a>
     </nav>
 
     <form onsubmit="return validate()" method="POST">

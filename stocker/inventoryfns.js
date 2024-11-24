@@ -129,3 +129,23 @@ function deleteProduct(pid){
 
     xhr.send('pid=' + pid);
 }
+
+function checkQty(){
+    const stock = document.getElementById('stock').value;
+    console.log('This function is called');
+    if(stock <= 0){
+        document.getElementById('errStock').style.display = 'block';
+    }else{
+        document.getElementById('errStock').style.display = 'none';
+    }
+}
+
+function checkPrice(){
+    const stock = document.getElementById('price').value;
+    console.log('This function is called');
+    if(stock <= 0){
+        document.getElementById('errPrice').style.display = 'block';
+    }else{
+        document.getElementById('errPrice').style.display = 'none';
+    }
+}

@@ -17,6 +17,8 @@ $cid = $_SESSION['userid'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bill History</title>
+    <link rel="stylesheet" href="./cashiercss/display_bill.css">
+
 </head>
 <body>
 <h1>Showing Bills Created in this database...</h1>
