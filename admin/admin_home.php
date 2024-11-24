@@ -1,13 +1,11 @@
 
 <?php
-
 session_start();
 
 if(!isset($_SESSION['userid'])){
     header("Location: ../index.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -19,17 +17,17 @@ if(!isset($_SESSION['userid'])){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h1>Welcome <?php echo $_SESSION['name'];?></h1>
-    <br>
-    <nav>
-    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <a href="add_user.php" class="btn btn-outline-light btn-lg">Add a New User (Stocker/Cashier)</a>
-        <a href="display_user.php" class="btn btn-outline-light btn-lg">Display All Users</a>
-        <a href="display_bills.php" class="btn btn-outline-light btn-lg">Display Bill Records</a>
-        <a href="display_inventory.php" class="btn btn-outline-light btn-lg">Display Inventory</a>
-        <a href="../logout.php" class="btn btn-outline-light btn-lg">Logout</a>
+<body class="bg-cover bg-center" style="background-image: url('../images/pexels-karolina-grabowska-5650040.jpg');">
+    <div class="flex flex-col items-center justify-center min-h-screen p-4">
+        <h1 class="text-white text-4xl font-bold mb-8 animate-fadeIn"><b>Welcome</b> <?php echo $_SESSION['name'];?></h1>
+        <div class="bg-black bg-opacity-70 p-8 rounded-lg shadow-lg">
+            <nav class="flex flex-col space-y-4">
+                <a href="add_user.php" class="btn text-lg text-white py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">Add a New User (Stocker/Cashier)</a>
+                <a href="display_user.php" class="btn text-lg text-white py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">Display All Users</a>
+                <a href="display_bills.php" class="btn text-lg text-white py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">Display Bill Records</a>
+                <a href="display_inventory.php" class="btn text-lg text-white py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">Display Inventory</a>
+                <a href="../logout.php" class="btn text-lg text-white py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition">Logout</a>
+            </nav>
+        </div>
     </div>
-    </nav>
-</body>
 </html>

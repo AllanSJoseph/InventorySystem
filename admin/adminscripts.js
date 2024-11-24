@@ -1,5 +1,24 @@
+
+
 function validate(){
-    
+    let name = nameField.value;
+    let email = emailField.value;
+    let mob = mobField.value;
+    let address = addressField.value;
+    let password = passField.value;
+    let confpassword = confPassField.value;
+
+    if (name === '' || email === '' || mob === '' || address === '' || password === '' || confpassword === '') {
+        alert('Please fill in all fields.');
+        return false;
+    }
+
+    if (password !== confpassword) {
+        alert('Passwords do not match.');
+        return false;
+    }
+
+    return true;
 }
 
 function checkUser(){

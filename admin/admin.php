@@ -7,6 +7,23 @@ class Admin extends Database{
 
     function addUser($username, $password, $email, $phone, $address, $type){
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $checkSql = "SELECT username, email FROM users WHERE username = ? OR email = ?";
+        $checkStmt = $this->conn->prepare($checkSql);
+        $checkStmt->bind_param('ss', $username, $email);
+        $checkStmt->execute();
+        $checkResult = $checkStmt->get_result();
+
+        if ($checkResult->num_rows > 0) {
+            $row = $checkResult->fetch_assoc();
+            if ($row['username'] === $username) {
+                return ["status" => 0, "message" => "Duplicate username found."];
+            }
+            if ($row['email'] === $email) {
+                return ["status" => 0, "message" => "Duplicate email found."];
+            }
+        }
+
         $sql = "INSERT INTO users (username, password, email, phone, address, type)
                 VALUES (?, ?, ?, ?, ?, ?)";
         
@@ -15,9 +32,9 @@ class Admin extends Database{
         $stmt->bind_param('ssssss', $username, $hashedPassword, $email, $phone, $address, $type);
 
         if($stmt->execute()){
-            return 1;
+            return ["status" => 1, "message" => "User added successfully."];
         }else{
-            return 0;
+            return ["status" => 0, "message" => "Something Went Wrong. Cannot Add User."];
         }
 
     }
