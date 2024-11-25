@@ -1,20 +1,24 @@
 /* General body styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa;  /* Soft light grayish blue background for a calm, neutral feel */
     margin: 0;
     padding: 0;
+    color: #4a4a4a;  /* Dark gray text for better readability */
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-    margin-top: 20px;
+    color: #4b6eaf;  /* Soft blue for the main heading */
+    font-size: 2.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 35px 0;
+    font-weight: 700;
 }
 
 h2 {
+    color: #4b6eaf;
     text-align: center;
     font-size: 1.5rem;
     margin-top: 20px;
@@ -75,29 +79,65 @@ button:hover {
 
 /* Table Styling */
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 95%;
+    margin: 10px auto;
     border-collapse: collapse;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 8px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    padding: 15px;
     text-align: center;
-    font-size: 1rem;
+    border: 1px solid #ddd;
+    font-size: 1em;
 }
 
 th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+    background-color: #4b6eaf;  /* Soft blue header */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-td {
-    background-color: #fff;
+tr:hover td {
+    background-color: #f1f8ff;  /* Soft light blue when row is hovered */
 }
 
-tbody tr:hover {
-    background-color: #f1f1f1;
+/* Button Styling */
+button {
+    background-color: #4caf50;  /* Green color for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.2s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;  /* Darker green on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
+}
+
+button:active {
+    background-color: #388e3c;  /* Even darker green on active */
+}
+
+/* Outline Button Styling */
+button.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid #4b6eaf;
+    color: #4b6eaf;
+}
+
+button.btn-outline-primary:hover {
+    background-color: #4b6eaf;
+    color: white;
 }
 
 /* Modal Styling */
@@ -126,23 +166,24 @@ tbody tr:hover {
 }
 
 button {
-    background-color: #008CBA;
+    background-color: #4b6eaf;
     margin-top: 10px;
 }
 
 button:hover {
-    background-color: #007B9E;
+    background-color: #4b6eaf;
 }
 
-/* Additional Styling for the footer buttons */
-button {
-    background-color: #008CBA;
-    margin-top: 20px;
-    padding: 10px 20px;
+
+button.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid #4b6eaf;
+    color: #4b6eaf;
 }
 
-button:hover {
-    background-color: #007B9E;
+button.btn-outline-primary:hover {
+    background-color: #4b6eaf;
+    color: white;
 }
 
 /* Responsive Design */

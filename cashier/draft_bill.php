@@ -26,25 +26,10 @@ if(isset($_GET['invoiceno'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draft Bill</title>
     <link rel="stylesheet" href="./cashiercss/draft_bill.css">
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
     <h1 style="text-align: center;">DRAFT BILL</h1>
-<div class="form-container>
+<div class="form-container">
     <form id="productForm">  
         <label for="invNo">Invoice No:</label>
         <input type="number" name="invNo" id="invNo" value=<?php echo $invno; ?> disabled><br><br>
@@ -70,6 +55,7 @@ if(isset($_GET['invoiceno'])){
         <input type="button" value="Add" class="formbtn" id="add" onclick="addEntry()">
         <input type="reset" class="formbtn" value="Clear">
     </form>
+</div>
 
     <h2 style="text-align: center;">Product Details</h2>
     <table id="bill">
@@ -87,7 +73,7 @@ if(isset($_GET['invoiceno'])){
         <tbody id="billBody">
         </tbody>
     </table>
-    </div>
+    
 
     <button onclick="openPaymentModel()">Issue Bill</button>
     <button onclick="discardBill()">Discard Bill</button>
@@ -105,8 +91,8 @@ if(isset($_GET['invoiceno'])){
             <input type="number" id="editQuantity">
             
             <br><br>
-            <button onclick="saveQuantity()">Save</button>
-            <button onclick="closeEditModal()">Cancel</button>
+            <button class="btn btn-outline-primary" onclick="saveQuantity()">Save</button>
+            <button class="btn btn-outline-primary" onclick="closeEditModal()">Cancel</button>
         </div>
     </div>
 

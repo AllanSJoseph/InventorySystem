@@ -89,14 +89,14 @@ function updateTable() {
                 row.appendChild(editCell);
 
                 // Delete button
-                const deleteCell = document.createElement('td');
+                // const deleteCell = document.createElement('td');
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.onclick = function() {
                     deleteEntry(item.invoiceno,item.prodid);
                 };
-                deleteCell.appendChild(deleteButton);
-                row.appendChild(deleteCell);
+                editCell.appendChild(deleteButton);
+                row.appendChild(editCell);
 
                 tableBody.appendChild(row);
             });
