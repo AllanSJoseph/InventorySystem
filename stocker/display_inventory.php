@@ -21,8 +21,10 @@ if(!isset($_SESSION['userid'])){
 </head>
 <body>
     <h1>Showing All Items in the Inventory...</h1>
+    <button class="btn btn-outline-primary"><a href="stocker_home.php">Home</a></button>
     <button class="btn btn-outline-primary"><a href="add_item.php">Add Item to Inventory</a></button>
-    <button class="btn btn-outline-primary"><a href="#">Refresh Table</a></button>
+    <button class="btn btn-outline-primary" onclick="window.location= 'display_inventory.php'">Refresh Table</button>
+    <button class="btn btn-outline-primary"><a href="../logout.php">Logout</a></button>
 
     <?php 
       $items = $stocker->displayProductInventory();
@@ -81,12 +83,12 @@ if(!isset($_SESSION['userid'])){
                 <input type="text" id="editName" name="name"><br><br>
 
                 <label for="editPrice">Price:</label>
-                <input type="number" id="editPrice" name="price" min="0" >
-                <p id="errPrice" onkeyup="" style="display: None;">Value can't be negative or 0...</p><br><br>
+                <input type="number" onchange="checkPrice(this.value)" onkeyup="checkPrice(this.value)" id="editPrice" name="price" min="0" >
+                <p id="errPrice" class="errTxt">Value can't be negative or 0...</p><br><br>
 
                 <label for="editStock">Stock:</label>
-                <input type="number" onkeyup="checkQty()" id="editStock" name="stock">
-                <p id="errStock" style="display: None;">Value can't be negative or 0...</p><br><br>
+                <input type="number" onchange="checkQty(this.value)" onkeyup="checkQty(this.value)" id="editStock" name="stock">
+                <p id="errStock" class="errTxt">Value can't be negative or 0...</p><br><br>
 
                 <label for="editDescription">Description:</label>
                 <textarea id="editDescription" name="description"></textarea><br><br>
@@ -108,15 +110,18 @@ if(!isset($_SESSION['userid'])){
             <input type='number' id="spid" name="spid" disabled><br><br>
 
             <label for="editStockk">Stock:</label>
-            <input type="number" id="editStockk" name="editStockk"><br><br>
+            <input type="number" onchange="checkQty(this.value)" onkeyup="checkQty(this.value)" id="editStockk" name="editStockk"><br><br>
+            <p id="errrStock" class="errTxt">Value can't be negative or 0...</p><br><br>
 
             <button type="button" onclick="saveProductStock()">Save Changes</button>
             <button type="button" onclick="closeEditStockModal()">Cancel</button>
         </form>
     </div>
-</div>
+    </div>
+    <button id="goUpBtn">↑</button>
 
 <script src="inventoryfns.js"></script>
-    
+<script src="../admin/upbtn.js"></script>
+
 </body>
 </html>

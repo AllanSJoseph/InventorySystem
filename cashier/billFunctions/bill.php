@@ -77,6 +77,22 @@ class Bill extends Cashier{
         return $result;
     }
 
+    function checkQuantity($prodid,$quantity){
+        $sql ="SELECT stock FROM products WHERE prodid = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i",$prodid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()){
+            if($quantity >= $row['stock']){
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
     function editQuantity($invoiceno,$prodid,$price,$quantity){
         $newTPrice = $price * $quantity;
         $sql = "UPDATE bill_archive SET qty = ?, tprice = ? WHERE invoiceno = ? AND prodid = ?";

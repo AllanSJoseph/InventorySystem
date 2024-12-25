@@ -47,7 +47,7 @@ tr:hover td {
 
 /* Button Styling */
 button {
-    background-color: #4caf50;  /* Green color for buttons */
+    background-color: #4b6eaf;  /* Green color for buttons */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -59,13 +59,13 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;  /* Darker green on hover */
+    background-color: #4b6eaf;  /* Darker green on hover */
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow on hover */
 }
 
 button:active {
-    background-color: #388e3c;  /* Even darker green on active */
+    background-color: #4b6eaf;  /* Even darker green on active */
 }
 
 /* Outline Button Styling */
@@ -85,4 +85,29 @@ button.btn-outline-primary:hover {
     font-size: 1.5em;
     color: #e74c3c;  /* Red color for the "No Bills Issued" message */
     font-weight: bold;
+}
+
+#goUpBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #4b6eaf;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    z-index: 1000;
+    transition: opacity 0.3s, transform 0.3s; 
+}
+  
+#goUpBtn:hover {
+    background-color: #4b6eaf;
+    transform: scale(1.1);
 }

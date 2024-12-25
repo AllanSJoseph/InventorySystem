@@ -39,6 +39,35 @@ class Admin extends Database{
 
     }
 
+    function fetchUserData($userid){
+        $sql = "SELECT * FROM users WHERE userid = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i",$userid);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            return ["status" => "1", "userid" => $row['userid'], "username" => $row['username'], "password" => $row['password'], "email" => $row['email'], "phone" => $row['phone'], "address" => $row['address']];
+        }
+        }else{
+            return ["status" => "0"];
+        }
+    }
+
+    function updateUser($userid, $username, $email, $phone, $address){
+        $sql = "UPDATE users SET username = ?, email=?, phone=?, address=? WHERE userid=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('ssssi', $username, $email, $phone, $address, $userid);
+
+        if($stmt->execute()){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     function displayUsers($type = 'all'){
         if ($type === "all") {
             $sql = "SELECT userid, username, email, phone, address, type FROM users";

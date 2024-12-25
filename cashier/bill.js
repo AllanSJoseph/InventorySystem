@@ -32,6 +32,14 @@ prodId.oninput = () =>{
 }
 
 function updateTotalPrice() {
+    checkQty(quantity.value);
+    checkStock(quantity.value,prodId.value, function(result) {
+        if (result) {
+            return true;
+        }else {
+            return false;
+        }
+    });
     const totalPrice = price.value * quantity.value;
     tprice.value = totalPrice;
 }
@@ -116,24 +124,35 @@ function addEntry() {
         return;
     }
 
-    
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./billFunctions/addToBill.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    if(checkQty(quantity.value)){
+        alert('Stock cannot have value 0 or negative');
+        return false;
+    }
 
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            if (xhr.responseText === "success") {
-                alert("Product Added Successfully");
-                updateTable();
-                document.getElementById("productForm").reset();
-            } else {
-                alert("Error: " + xhr.responseText);
-            }
+    checkStock(quantity.value,prodId.value, function(result) {
+        if (result) {
+            alert('Error! Cannot add Item to bill! Quantity higher than Inventory Quantity...');
+            return false;
+        }else{
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "./billFunctions/addToBill.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    if (xhr.responseText === "success") {
+                        alert("Product Added Successfully");
+                        updateTable();
+                        document.getElementById("productForm").reset();
+                    } else {
+                        alert("Error: " + xhr.responseText);
+                    }
+                }
+            };
+
+            xhr.send(`invoiceno=${invoiceno.value}&prodid=${prodId.value}&prodname=${prodName.value}&price=${price.value}&quantity=${quantity.value}&totalPrice=${tprice.value}`);
         }
-    };
-
-    xhr.send(`invoiceno=${invoiceno.value}&prodid=${prodId.value}&prodname=${prodName.value}&price=${price.value}&quantity=${quantity.value}&totalPrice=${tprice.value}`);
+    });
 }
 
 
@@ -157,23 +176,36 @@ function saveQuantity() {
     const itemPrice = document.getElementById("editPrice").value;
     const newQuantity = document.getElementById("editQuantity").value;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', './billFunctions/updateQuantity.php', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    if(checkQty(newQuantity)){
+        alert('Stock cannot have value 0 or negative');
+        document.getElementById('errQty').style.display = 'none';
+        return false;
+    }
 
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            if (xhr.responseText === "success") {
-                alert("Quantity updated successfully!");
-                closeEditModal();
-                updateTable(); 
-            } else {
-                alert("Failed to update quantity.");
-            }
+    checkStock(newQuantity,itemProdId, function(result) {
+        if (result) {
+            alert('Error! Cannot add Item to bill! Quantity higher than Inventory Quantity...');
+            return false;
+        }else{
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', './billFunctions/updateQuantity.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    if (xhr.responseText === "success") {
+                        alert("Quantity updated successfully!");
+                        closeEditModal();
+                        updateTable(); 
+                    } else {
+                        alert("Failed to update quantity.");
+                    }
+                }
+            };
+
+            xhr.send(`invoiceno=${itemInvoiceNo}&prodid=${itemProdId}&price=${itemPrice}&quantity=${newQuantity}`);
         }
-    };
-
-    xhr.send(`invoiceno=${itemInvoiceNo}&prodid=${itemProdId}&price=${itemPrice}&quantity=${newQuantity}`);
+    });    
 }
 
 
@@ -249,4 +281,58 @@ function issueBill(){
 
     xhr.send();
 }
+
+function checkStock(qty,pid,callback){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',`./billFunctions/checkQuantity.php?pid=${pid}&qty=${qty}`,true);
+
+    xhr.onload = function() {
+        if(xhr.status == 200){
+            console.log(xhr.responseText);
+            if(xhr.responseText === "Error"){
+                document.getElementById('errStk').style.display = 'block';
+                callback(true);
+            }else{
+                document.getElementById('errStk').style.display = 'none';
+                callback(false);
+            }
+        }
+    }
+
+    xhr.send();
+}
+
+function checkQty(qty){
+    if(qty <= 0){
+        document.getElementById('errQty').style.display = 'block';
+        return true;
+    }else{
+        document.getElementById('errQty').style.display = 'none';
+        return false;
+    }
+}
+
+function validateEditQuantity(){
+    const eqty = document.getElementById('editQuantity').value;
+    const epid = document.getElementById('editProdId').value;
+    if(checkQty(eqty)){
+        document.getElementById('errQty').style.display = 'none';
+        document.getElementById('errrQty').style.display = 'block';
+        return false;
+    }else{
+        document.getElementById('errrQty').style.display = 'none';
+    }
+
+    checkStock(eqty,epid, function(result) {
+        if (result) {
+            document.getElementById('errStk').style.display = 'none';
+            document.getElementById('errrStk').style.display = 'block';
+            return false;
+        }else{
+            document.getElementById('errrStk').style.display = 'none';
+            return true;
+        }
+    });    
+}
+
 window.onload = updateTable;

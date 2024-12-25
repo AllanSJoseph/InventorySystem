@@ -29,6 +29,8 @@ if(isset($_GET['invoiceno'])){
 </head>
 <body>
     <h1 style="text-align: center;">DRAFT BILL</h1>
+    <button onclick="window.location.href = 'cashier_home.php'">Home</button>
+    <button onclick="window.location.href = 'display_bills.php'">View Bills</button>
 <div class="form-container">
     <form id="productForm">  
         <label for="invNo">Invoice No:</label>
@@ -43,6 +45,8 @@ if(isset($_GET['invoiceno'])){
 
         <label for="quantity">Quantity</label>
         <input type="number" name="quantity" id="quantity" oninput="updateTotalPrice()">
+        <p id="errQty" class="errTxt">Value can't be negative or 0...</p>
+        <p id="errStk" class="errTxt">Quantity value higher than stock value...</p>
 
         <label for="price">Price</label>
         <input type="number" name="price" id="price" disabled>
@@ -88,7 +92,9 @@ if(isset($_GET['invoiceno'])){
             <input type="hidden" id="editPrice">
             
             <label for="editQuantity">New Quantity:</label>
-            <input type="number" id="editQuantity">
+            <input type="number" id="editQuantity" oninput="validateEditQuantity()">
+            <p id="errrQty" class="errTxt">Value can't be negative or 0...</p>
+            <p id="errrStk" class="errTxt">Quantity value higher than stock value...</p>
             
             <br><br>
             <button class="btn btn-outline-primary" onclick="saveQuantity()">Save</button>

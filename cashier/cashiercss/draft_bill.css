@@ -196,3 +196,8 @@ button.btn-outline-primary:hover {
         width: 100%;
     }
 }
+
+.errTxt {
+    color: red;
+    display: none;
+}

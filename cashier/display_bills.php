@@ -22,7 +22,7 @@ $cid = $_SESSION['userid'];
 </head>
 <body>
 <h1>Showing Bills Created in this database...</h1>
-
+<button onclick="window.location.href = 'cashier_home.php'">Home</button>
 <?php 
   $bills = $cashier->displayBillHistory($cid);
 
@@ -66,6 +66,10 @@ $cid = $_SESSION['userid'];
     }
 ?>
 
+<button id="goUpBtn">↑</button>
+
 <script src="dBill.js"></script>
+<script src="../admin/upbtn.js"></script>
+
 </body>
 </html>

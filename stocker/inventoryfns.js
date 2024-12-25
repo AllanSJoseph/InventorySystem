@@ -1,9 +1,14 @@
 function closeEditModal() {
     document.getElementById('editModal').style.display = 'none';
+    document.getElementById('errPrice').style.display = 'none';
+    document.getElementById('errStock').style.display = 'none';
+    document.getElementById('errrStock').style.display = 'none';
 }
 
 function closeEditStockModal() {
     document.getElementById('editStockModal').style.display = 'none';
+    document.getElementById('errStock').style.display = 'none';
+    document.getElementById('errrStock').style.display = 'none';
 }
 
 function editProduct(pid) {
@@ -59,51 +64,82 @@ function saveProduct(){
     let newStock = document.getElementById('editStock').value;
     let newDescription = document.getElementById('editDescription').value;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'updateItem.php',true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    if(newName === "" || newPrice === "" || newStock === "" || newDescription === ""){
+        alert('Please fill out all the fields');
+        return false;
+    }
 
-    xhr.onload = function() {
-        if(xhr.status === 200){
-            if (xhr.responseText === "success") {
-                alert("Product Details updated successfully!");
-                closeEditModal();
-                location.replace(location.href);
-            } else {
-                alert("Failed to update Product Details.");
+    if(checkQty(newStock)){
+        alert('Stock cannot have value 0 or negative');
+        return false;
+    }
+
+    if(checkPrice(newPrice)){
+        alert('Price cannot have value 0 or negative');
+        return false;
+    }
+
+    if(confirm('Are you sure you want to make changes to this product?')){
+       const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'updateItem.php',true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function() {
+            if(xhr.status === 200){
+                if (xhr.responseText === "success") {
+                    alert("Product Details updated successfully!");
+                    closeEditModal();
+                    location.replace(location.href);
+                } else {
+                    alert("Failed to update Product Details.");
+                }
+            }else{
+                alert('Failed to Update Product Details, cannot connect to server.');
             }
-        }else{
-            alert('Failed to Update Product Details, cannot connect to server.');
-        }
-    };
+        };
 
-    xhr.send(`pid=${prodid}&name=${newName}&price=${newPrice}&stock=${newStock}&description=${newDescription}`);
+        xhr.send(`pid=${prodid}&name=${newName}&price=${newPrice}&stock=${newStock}&description=${newDescription}`); 
+    }
 }
 
 
 function saveProductStock() {
     const pid = document.getElementById('spid').value;
     const stock = document.getElementById('editStockk').value;
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'updateProductStock.php', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            if (xhr.responseText === "success"){
-                alert('Stock updated successfully!');
-                closeEditStockModal();
-                location.replace(location.href);
-            }else {
-                alert('Failed to Update Stock.');
+    if(stock === ""){
+        alert("Please fill out the required Field...");
+        return false;
+    }
+
+    if(checkQty(stock)){
+        alert('Stock cannot have value 0 or negative');
+        return false;
+    }
+
+    if(confirm('Are you sure, you want to update the stock of this product?')){
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'updateProductStock.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                if (xhr.responseText === "success"){
+                    alert('Stock updated successfully!');
+                    closeEditStockModal();
+                    location.replace(location.href);
+                }else {
+                    alert('Failed to Update Stock.');
+                }
+                
+            } else {
+                alert('Failed to update stock.');
             }
-            
-        } else {
-            alert('Failed to update stock.');
-        }
-    };
+        };
 
-    xhr.send(`pid=${pid}&stock=${stock}`);
+        xhr.send(`pid=${pid}&stock=${stock}`);  
+    }
+    
 }
 
 function deleteProduct(pid){
@@ -130,22 +166,49 @@ function deleteProduct(pid){
     xhr.send('pid=' + pid);
 }
 
-function checkQty(){
-    const stock = document.getElementById('stock').value;
-    console.log('This function is called');
-    if(stock <= 0){
+function checkQty(qty){
+    if(qty <= 0){
         document.getElementById('errStock').style.display = 'block';
+        document.getElementById('errrStock').style.display = 'block';
+        return true;
     }else{
         document.getElementById('errStock').style.display = 'none';
+        document.getElementById('errrStock').style.display = 'none';
+        return false;
     }
 }
 
-function checkPrice(){
-    const stock = document.getElementById('price').value;
-    console.log('This function is called');
-    if(stock <= 0){
+function checkPrice(price){
+    if(price <= 0){
         document.getElementById('errPrice').style.display = 'block';
+        return true;
     }else{
         document.getElementById('errPrice').style.display = 'none';
+        return false;
     }
+}
+
+function validate(){
+    const pname = document.getElementById('pname').value;
+    const price = document.getElementById('price').value;
+    const stock = document.getElementById('stock').value;
+    const description = document.getElementById('description').value;
+
+    if(pname === "" || price === "" || stock === "" || description === ""){
+        alert('Please fill out all the fields');
+        return false;
+    }
+
+    if(checkQty(stock)){
+        console.log('if stock statement called...');
+        alert('Stock cannot have value 0 or negative');
+        return false;
+    }
+
+    if(checkPrice(price)){
+        alert('Price cannot have value 0 or negative');
+        return false;
+    }
+
+    return true;
 }
