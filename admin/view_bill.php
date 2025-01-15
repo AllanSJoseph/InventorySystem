@@ -36,8 +36,8 @@ $billItems = $admin->displayBillItems($invno);
 
     <h2><b>Invoice No: </b><?php echo $billDetails['invoiceno']; ?></h2>
     <h2><b>Date: </b><?php echo $billDetails['date']; ?></h2>
-    <h2><b>Payment Method: </b><?php echo $billDetails['total_price']; ?></h2>
-    <h2><b>Total Price: </b><?php echo $billDetails['paymethod']; ?></h2>
+    <h2><b>Payment Method: </b><?php echo $billDetails['paymethod']; ?></h2>
+    <h2><b>Total Price: ₹</b><?php echo $billDetails['total_price']; ?></h2>
 
     <?php
     if(empty($billItems)){
@@ -65,9 +65,9 @@ $billItems = $admin->displayBillItems($invno);
                   echo '<td>' . $count . '</td>';
                   echo '<td>'.$row["prodid"].'</td>';
                   echo '<td>' . $row["name"] . '</td>';
-                  echo '<td>' . $row["price"] . '</td>';
+                  echo '<td>₹' . $row["price"] . '</td>';
                   echo '<td>' . $row["qty"] . '</td>';
-                  echo '<td>' . $row["tprice"] . '</td>';
+                  echo '<td>₹' . $row["tprice"] . '</td>';
                   echo '</tr>';
     
                   $count++;
