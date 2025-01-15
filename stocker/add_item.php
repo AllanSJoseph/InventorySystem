@@ -49,7 +49,7 @@ if(isset($_POST["pname"]) && isset($_POST["price"]) && isset($_POST["stock"]) &&
         <input type="reset" value="Reset">
         <input type="submit" value="Submit">
     </form>
-    <button onclick="history.back()">Back</button>
+    <button onclick="window.location = 'display_inventory.php'" type="back" >Back</button>
 
     <div style="display: None;">
       <p id="errrStock" style="display: None;">Debugging Hidden Tag</p>
