@@ -1,5 +1,7 @@
 # INVENTORY MANAGEMENT SYSTEM
 
+> New MCP Support is Added! Check the MCP Branch of this repository for more details.
+
 Inventory Management System is a web based application made to track and manage product storage efficiently, preventing overstocking or stockouts.
 
 It offers features like stock forecasting and detailed reporting, reducing manual errors and ensuring optimal stock levels.
