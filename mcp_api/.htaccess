@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Send all requests to api.php except for real files/folders
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ api.php [QSA,L]

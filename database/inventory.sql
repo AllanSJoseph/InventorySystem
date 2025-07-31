@@ -157,7 +157,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userid`, `username`, `password`, `email`, `phone`, `address`, `type`) VALUES
 (1, 'Admin', '$2y$10$.7p2GnQqG/AdY.CLz2TOWeHGlqtCgPA3uzJmhQRGh59eYBl2P5ahC', 'admin@gmail.com', '2446789900', 'admin', 'Admin'),
 (2, 'Cashier', '$2y$10$WmucKBiVwn1qZsJygFtpZOPLUXbpGuHJ8kVkaHbXn2YsUGDs3CEGC', 'cashier@gmail.com', '3344221133', 'cashiers', 'Cashier'),
-(5, 'Stocker', '$2y$10$k4s0rizyKjgcczNchRXvWeCgIyv4qy9hqEfFt7ufMDdgFHCD.v27.', 'stocoker@gmail.com', '1334455667', 'stockers', 'Stocker');
+(3, 'Stocker', '$2y$10$k4s0rizyKjgcczNchRXvWeCgIyv4qy9hqEfFt7ufMDdgFHCD.v27.', 'stocoker@gmail.com', '1334455667', 'stockers', 'Stocker'),
+(4, 'Api', '$2y$10$x69kyTI2dWPnuJaH.P0eEuzacKqtU1jQFGRqCoFqiIFJPZTRxvIGW', 'api@invmgmt.com', '0', 'api', 'Cashier');
 
 --
 -- Indexes for dumped tables

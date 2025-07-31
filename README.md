@@ -1,4 +1,8 @@
-# INVENTORY MANAGEMENT SYSTEM
+# INVENTORY MANAGEMENT SYSTEM (With MCP Support)
+
+> This Branch contains the mcp module. Changes are on mcp_api folder. Check out the MCP Server repository [InventorySystemMCP](https://github.com/AllanSJoseph/InventorySystem_MCP_Server)
+
+>**Please don't merge this branch with the main branch.**
 
 Inventory Management System is a web based application made to track and manage product storage efficiently, preventing overstocking or stockouts.
 

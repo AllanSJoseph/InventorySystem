@@ -1,6 +1,6 @@
 <?php
 
-require '../cashier.php';
+require __DIR__. '/../cashier.php';
 
 class Bill extends Cashier{
     function addEntry($invoiceno,$prodid,$quantity,$tprice){
