@@ -53,7 +53,7 @@ switch($method){
 
             if ($details['paymethod'] !== NULL) {
                 http_response_code(403);
-                echo json_encode(["error" => "Forbidden! You are not allowed to delete a paid bill!"]);
+                echo json_encode(["error" => "Forbidden! You are not allowed to issue an already paid bill!"]);
                 exit;
             }
 
